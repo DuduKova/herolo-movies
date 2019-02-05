@@ -1,13 +1,18 @@
-
-<div class="modal-dialog modal-notify modal-danger modal-side modal-top-right" role="document">
+<div class="modal-dialog modal-notify modal-danger" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <div class="alert alert-danger" role="alert">
-        Movie with this title already exists.
-      </div>
-      <a type="button" mdbBtn color="danger" outline="true" class="waves-effect" mdbWavesEffect (click)="closeAlertModal()"
-         data-dismiss="modal"><h4>Close</h4></a>
+      <p class="heading lead">Not allowed.</p>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeAlertModal()">
+        <span aria-hidden="true" class="white-text">&times;</span>
+      </button>
+    </div>
+    <div class="alert alert-danger modal-body" role="alert">
+      <h2>Movie with this title already exists.</h2>
+      <i class="fas fa-times fa-4x mb-3 animated rotateIn"></i>
+    </div>
+    <div class="modal-footer justify-content-center">
+      <a type="button" mdbBtn color="danger" outline="true" class="waves-effect" mdbWavesEffect
+         (click)="closeAlertModal()">Close</a>
     </div>
   </div>
 </div>
-

@@ -48,7 +48,7 @@ export class MoviesComponent implements OnInit {
       filter(movie => movie.id === event.id));
     let check2;
     check.subscribe(value => check2 = value);
-    if (check2.Title === event.Title) {
+    if (check2.id === event.id && check2.Title === event.Title) {
       this.store.dispatch(new fromStore.UpdateMovie(event));
     } else {
       return this.alertModal.show();
