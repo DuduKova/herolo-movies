@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Movie} from '../../models/Movie';
 
 @Component({
   selector: 'app-modal',

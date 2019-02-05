@@ -12,7 +12,7 @@ const KEY = 'f6e4a6dd';
 export class MoviesService {
   constructor(private http: HttpClient) {}
   getMoviesFirst() {
-    return this.http.get(`http://www.omdbapi.com/?apikey=${KEY}&s=batman&type=movie`)
+    return this.http.get(`https://www.omdbapi.com/?apikey=${KEY}&s=batman&type=movie`)
       // @ts-ignore
       .pipe(mergeMap(res => res.Search as Movie[]),
         mergeMap(movie => {
