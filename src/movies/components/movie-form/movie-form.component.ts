@@ -90,6 +90,7 @@ export class MovieFormComponent implements OnChanges {
     if (this.exists) {
       this.title = 'Edit Movie';
       this.form.patchValue(this.selectedMovie);
+      this.form.touched;
     } else {
       this.form.reset();
     }
