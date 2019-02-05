@@ -32,7 +32,7 @@ export class MovieFormComponent implements OnChanges {
     Title: ['', Validators.compose([
       Validators.required,
       Validators.minLength(2),
-      Validators.pattern('^[a-zA-Z0-9._-]+$')])],
+      Validators.pattern('^[a-zA-Z0-9., -]+$')])],
     Director: ['', Validators.compose([
       Validators.required,
       Validators.minLength(2),
@@ -40,7 +40,7 @@ export class MovieFormComponent implements OnChanges {
     Runtime: ['', Validators.compose([
       Validators.required,
       Validators.maxLength(4),
-      Validators.pattern('^[0-9]*$')])],
+      Validators.pattern('[a-zA-Z0-9 ]*')])],
     Year: ['', Validators.compose([
       Validators.required,
       Validators.minLength(4),
@@ -51,6 +51,11 @@ export class MovieFormComponent implements OnChanges {
       Validators.required,
       Validators.minLength(2),
       Validators.pattern('[a-zA-Z ]*')
+    ])],
+    Poster: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(2),
+      Validators.pattern('https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)')
     ])],
   });
 

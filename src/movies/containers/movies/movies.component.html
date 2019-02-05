@@ -19,6 +19,6 @@
 
 <app-modal mdbModal #deleteModal="mdbModal" class="modal fade right" id="frameModalTop" tabindex="-1" role="dialog"
            aria-labelledby="myModalLabel" aria-hidden="true"
-           (hide)="onCloseDeleteModal($event)" (delete)="onCloseDeleteModal($event)" [movie]="selectedMovie">
+           (hide)="onCancelDeleteModal()" (delete)="onCloseDeleteModal($event)" [movie]="selectedMovie">
 </app-modal>
 

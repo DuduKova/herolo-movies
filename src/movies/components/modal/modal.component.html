@@ -1,18 +1,18 @@
- <div class="modal-dialog modal-notify modal-danger modal-side modal-top-right" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <p class="heading">Delete this movie?</p>
-
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
-          <span aria-hidden="true" class="white-text">&times;</span>
-        </button>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <a type="button" mdbBtn color="black" class="waves-effect" mdbWavesEffect (click)="closeModalAndDelete()"><h4>YES</h4>
-          <i class="fas fa-trash fa-3x red-text pr-3"></i>
-        </a>
-        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" mdbWavesEffect (click)="closeModal()"
-           data-dismiss="modal"><h4>No, thanks</h4></a>
-      </div>
+<div class="modal-dialog modal-notify modal-danger modal-side modal-top-right" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <p class="heading">Delete this movie?</p>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true" class="white-text">&times;</span>
+      </button>
     </div>
+    <div class="modal-footer justify-content-center">
+      <a type="button" mdbBtn color="black" class="waves-effect" mdbWavesEffect (click)="closeModalAndDelete()">
+        <h5>YES</h5>
+        <i class="fas fa-trash fa-2x white-text pr-3"></i>
+      </a>
+      <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" mdbWavesEffect (click)="closeModal()"
+         data-dismiss="modal"><h4>No, thanks</h4></a>
     </div>
+  </div>
+</div>

@@ -18,7 +18,7 @@ export class MoviesService {
         mergeMap(movie => {
           return this.http.get(`https://www.omdbapi.com/?apikey=${KEY}&t=${movie.Title}`);
         }),
-        map((movie, index) => ({id: index, ..._.pick(movie, ['Title', 'Director' , 'Year' , 'Runtime' , 'Genre'])})),
+        map((movie, index) => ({id: index, ..._.pick(movie, ['Title', 'Director' , 'Year' , 'Runtime' , 'Genre', 'Poster'])})),
         reduce((acc, value) => acc.concat([value]), []),
         catchError((error: any) => throwError(error.json())));
   }

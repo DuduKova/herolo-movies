@@ -32,7 +32,7 @@ export class MoviesComponent implements OnInit {
   }
 
   onRemove(event: Movie) {
-    this.store.dispatch(new fromStore.RemoveMovie(event));
+    this.confirmDelete(event);
   }
 
   openFormModal(movie: Movie) {
@@ -57,6 +57,10 @@ export class MoviesComponent implements OnInit {
     this.deleteModal.hide();
     this.deleteModal.movie = null;
     this.formModal.exists = false;
+  }
+
+  onCancelDeleteModal() {
+    this.deleteModal.hide();
   }
 
   confirmDelete(movie: Movie) {

@@ -1,7 +1,7 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <h4 class="modal-title" id="exampleModalLabel">{{title}}</h4>
+      <h4 class="modal-title text-white" id="exampleModalLabel">{{title}}</h4>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
         <span aria-hidden="true">×</span>
       </button>
@@ -9,56 +9,58 @@
     <div class="modal-body">
       <form [formGroup]="form">
         <div class="md-form">
-          <input mdbInputDirective formControlName="Title" type="text" id="form1" class="form-control"
+          <input mdbInputDirective formControlName="Title" type="text" id="form1" class="form-control text-white"
                  [class.error]="nameControlInvalid">
-          <label for="form1" class="">Title</label>
+          <label for="form1" class="text-white">Title</label>
         </div>
         <div class="md-form">
-          <input mdbInputDirective formControlName="Director" type="text" id="form2" class="form-control"
+          <input mdbInputDirective formControlName="Director" type="text" id="form2" class="form-control text-white"
                  [class.error]="nameControlInvalid">
-          <label for="form2" class="">Director</label>
+          <label for="form2" class="text-white">Director</label>
         </div>
         <div class="md-form">
-        <input mdbInputDirective formControlName="Year" type="text" id="form3" class="form-control"
+        <input mdbInputDirective formControlName="Year" type="text" id="form3" class="form-control text-white"
                [class.error]="nameControlInvalid">
-          <label for="form3" class="">Year</label>
+          <label for="form3" class="text-white">Year</label>
         </div>
         <div class="md-form">
-        <input mdbInputDirective formControlName="Runtime" type="text" id="form4" class="form-control"
+        <input mdbInputDirective formControlName="Runtime" type="text" id="form4" class="form-control text-white"
                [class.error]="nameControlInvalid">
-          <label for="form4" class="">Runtime (min)</label>
+          <label for="form4" class="text-white">Runtime</label>
         </div>
           <div class="md-form">
-        <label for="form5" class="">Genre</label>
-        <input mdbInputDirective formControlName="Genre" type="text" id="form5" class="form-control"
+        <label for="form5" class="text-white">Genre</label>
+        <input mdbInputDirective formControlName="Genre" type="text" id="form5" class="form-control text-white"
                [class.error]="nameControlInvalid">
           </div>
+        <div class="md-form">
+          <label for="form6" class="text-white">Poster</label>
+          <input mdbInputDirective formControlName="Poster" type="text" id="form6" class="form-control text-white"
+                 [class.error]="nameControlInvalid">
+        </div>
 
     <ng-content></ng-content>
     </form>
 
     <div class="modal-footer">
-      <button size="md" mdbBtn [disabled]="form.invalid"
-        type="button" class="btn btn-primary waves-light" mdbWavesEffect
+      <button [disabled]="form.invalid" class="float-right btn third"
         *ngIf="!exists"
         (click)="createMovie(form)">
         Create Movie
       </button>
 
-      <button size="md" mdbBtn type="button" color="primary" mdbWavesEffect
+      <button class="float-right btn third"
         *ngIf="exists"
         (click)="updateMovie(form)">
         Save changes
       </button>
 
-      <button size="md" mdbBtn type="button" color="danger" mdbWavesEffect
+      <button class="float-right btn first"
         *ngIf="exists"
         (click)="removeMovie(form)">
         Delete Movie
       </button>
-      <button size="md" mdbBtn type="button" color="yellow" data-dismiss="modal" (click)="closeModal()"
-              mdbWavesEffect>Close
-      </button>
+      <button class="float-right btn fourth" (click)="closeModal()">Close</button>
     </div>
   </div>
 </div>

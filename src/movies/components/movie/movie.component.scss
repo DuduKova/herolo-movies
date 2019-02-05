@@ -1,10 +1,13 @@
+@import '../../../styles';
+
 .card {
-  background: linear-gradient(45deg, rgba(13, 17, 198, 0.69) , rgba(213, 15, 61, 0.6) 100%);
-  button {
-    background-color: white;
-    color: black;
-  }
+  background: linear-gradient(45deg, $secondary-color , $primary-color 100%);
+  max-width: 350px;
 }
+
+.card-img-top {
+   max-width: 350px;
+ }
 .scale-in-center {
   -webkit-animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -34,3 +37,4 @@
     opacity: 1;
   }
 }
+
