@@ -4,7 +4,7 @@ import {Observable, } from 'rxjs';
 import {Movie} from '../../models/Movie';
 import * as fromStore from '../../store';
 import {MovieFormComponent} from '../../components';
-import { filter, map, mergeMap} from 'rxjs/operators';
+import { filter, mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'movies',
@@ -40,7 +40,6 @@ export class MoviesComponent implements OnInit {
     let check2;
     check.subscribe(value => check2 = value);
     if (check2) {
-      console.log(check2);
       return this.alertModal.show();
     } else {
       this.store.dispatch(new fromStore.CreateMovie(event));
@@ -54,8 +53,6 @@ export class MoviesComponent implements OnInit {
     let check2;
     check.subscribe(value => check2 = value);
     if (check2.id === event.id && check2.Title === event.Title) {
-      console.log(check);
-      console.log(check2);
       this.store.dispatch(new fromStore.UpdateMovie(event));
     } else {
       return this.alertModal.show();
@@ -83,10 +80,10 @@ export class MoviesComponent implements OnInit {
   }
 
   onCloseDeleteModal(movie: Movie) {
-    this.store.dispatch(new fromStore.RemoveMovie(movie));
     this.onFormModalClosed();
     this.deleteModal.hide();
     this.deleteModal.selectedMovie = null;
+    this.store.dispatch(new fromStore.RemoveMovie(movie));
   }
 
   closeAlertModal() {
