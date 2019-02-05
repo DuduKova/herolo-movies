@@ -10,6 +10,7 @@
           <input mdbInputDirective formControlName="Title" type="text" id="form1" class="form-control font-weight-bold text-black"
                  [class.error]="titleControl">
           <label for="form1" class="text-black">Title</label>
+          <input hidden formControlName="id" [ngModel]="id + 1">
         </div>
         <div class="md-form">
           <input mdbInputDirective formControlName="Director" type="text" id="form2" class="form-control font-weight-bold text-black"

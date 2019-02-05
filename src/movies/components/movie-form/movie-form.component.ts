@@ -20,6 +20,7 @@ export class MovieFormComponent implements OnChanges {
   @Input() exists: boolean;
   title = 'Add Movie';
   @Input() selectedMovie: Movie;
+  id = 11;
 
   @Output() selected = new EventEmitter<Movie>();
   @Output() create = new EventEmitter<Movie>();
@@ -28,6 +29,7 @@ export class MovieFormComponent implements OnChanges {
   @Output() hide = new EventEmitter();
 
   form = this.fb.group({
+    id: [this.id],
     Title: ['', Validators.compose([
       Validators.required,
       Validators.minLength(2),
@@ -79,6 +81,10 @@ export class MovieFormComponent implements OnChanges {
     return this.form.get('Poster') as FormControl;
   }
 
+  get idControl() {
+    return this.form.get('id') as FormControl;
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (this.exists) {
       this.title = 'Edit Movie';
@@ -94,6 +100,7 @@ export class MovieFormComponent implements OnChanges {
   }
 
   createMovie(form: FormGroup) {
+    this.id ++;
     const {value, valid} = form;
     if (valid) {
       this.create.emit(value);
