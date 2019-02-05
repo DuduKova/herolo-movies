@@ -14,6 +14,7 @@ import * as fromComponents from './components';
 import * as fromContainers from './containers';
 import * as fromServices from './services';
 import * as fromGuards from './guards';
+import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
 
 export const ROUTES: Routes = [
   {
@@ -45,7 +46,7 @@ export const ROUTES: Routes = [
     FormsModule,
   ],
   providers: [...fromServices.services, ...fromGuards.guards],
-  declarations: [...fromContainers.containers, ...fromComponents.components ],
+  declarations: [...fromContainers.containers, ...fromComponents.components, AlertModalComponent ],
   exports: [...fromContainers.containers],
 })
 export class MoviesModule {}

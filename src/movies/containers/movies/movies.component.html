@@ -1,24 +1,35 @@
-<div class="card-deck">
-  <div class="card-group" *ngFor="let movie of (movies$ | async)">
-    <movie [movie]="movie" (selectedMovie)="openFormModal(movie)" (remove)="confirmDelete(movie)"></movie>
+<div class="card-deck" *ngIf="(loading | async); else spinner">
+  <div class="card-group mb-5" *ngFor="let movie of (movies$ | async)">
+    <movie [movie]="movie" (selectedMovie)="openFormModalEdit(movie)" (remove)="confirmDelete(movie)"></movie>
   </div>
 </div>
 
+<ng-template #spinner>
+  <p>
+    Welcome
+    <span>
+    LODING MOVIES...
+  </span>
+    &mdash; David Kovalski &mdash;
+  </p>
+</ng-template>
 
-<app-movie-form
-  mdbModal #formModal="mdbModal" class="modal fade"
-  id="exampleModal" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalLabel" aria-hidden="true"
-  [movie]="selectedMovie"
-  (create)="onCreate($event)"
-  (update)="onUpdate($event)"
-  (remove)="onRemove($event)"
-  (hide)="closeFormModal()"
-  (closed)="onFormModalClosed()">
+<app-movie-form [exists]="exists"
+                mdbModal #formModal="mdbModal" class="modal fade"
+                id="exampleModal" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true"
+                [selectedMovie]="selectedMovie"
+                (create)="onCreate($event)"
+                (update)="onUpdate($event)"
+                (remove)="onRemove($event)"
+                (hide)="onFormModalClosed()">
 </app-movie-form>
 
 <app-modal mdbModal #deleteModal="mdbModal" class="modal fade right" id="frameModalTop" tabindex="-1" role="dialog"
            aria-labelledby="myModalLabel" aria-hidden="true"
-           (hide)="onCancelDeleteModal()" (delete)="onCloseDeleteModal($event)" [movie]="selectedMovie">
+           (hide)="onCancelDeleteModal()" (delete)="onCloseDeleteModal($event)" [selectedMovie]="selectedMovie">
 </app-modal>
+
+<app-alert-modal mdbModal #alertModal="mdbModal" class="modal fade right" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel" aria-hidden="true" (closeAlert)="closeAlertModal()"></app-alert-modal>
 

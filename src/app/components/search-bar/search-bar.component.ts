@@ -12,7 +12,7 @@ export class SearchBarComponent implements OnInit {
 
   ngOnInit() {
   }
-  onCreateMovie() {
-    this.create.emit();
+  onCreateMovie(event) {
+    this.create.emit(event);
   }
 }

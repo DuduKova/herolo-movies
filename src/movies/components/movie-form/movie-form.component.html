@@ -1,55 +1,53 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <h4 class="modal-title text-white" id="exampleModalLabel">{{title}}</h4>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
-        <span aria-hidden="true">×</span>
-      </button>
+      <h4 class="modal-title text-black">{{title}}</h4>
+      <button type="button" class="close text-black font-weight-bold" (click)="closeModal()">X</button>
     </div>
     <div class="modal-body">
       <form [formGroup]="form">
         <div class="md-form">
-          <input mdbInputDirective formControlName="Title" type="text" id="form1" class="form-control text-white"
-                 [class.error]="nameControlInvalid">
-          <label for="form1" class="text-white">Title</label>
+          <input mdbInputDirective formControlName="Title" type="text" id="form1" class="form-control font-weight-bold text-black"
+                 [class.error]="titleControl">
+          <label for="form1" class="text-black">Title</label>
         </div>
         <div class="md-form">
-          <input mdbInputDirective formControlName="Director" type="text" id="form2" class="form-control text-white"
-                 [class.error]="nameControlInvalid">
-          <label for="form2" class="text-white">Director</label>
+          <input mdbInputDirective formControlName="Director" type="text" id="form2" class="form-control font-weight-bold text-black"
+                 [class.error]="directorControl">
+          <label for="form2" class="text-black">Director</label>
         </div>
         <div class="md-form">
-        <input mdbInputDirective formControlName="Year" type="text" id="form3" class="form-control text-white"
-               [class.error]="nameControlInvalid">
-          <label for="form3" class="text-white">Year</label>
+        <input mdbInputDirective formControlName="Year" type="text" id="form3" class="form-control font-weight-bold text-black"
+               [class.error]="runtimeControl">
+          <label for="form3" class="text-black">Year</label>
         </div>
         <div class="md-form">
-        <input mdbInputDirective formControlName="Runtime" type="text" id="form4" class="form-control text-white"
-               [class.error]="nameControlInvalid">
-          <label for="form4" class="text-white">Runtime</label>
+        <input mdbInputDirective formControlName="Runtime" type="text" id="form4" class="form-control font-weight-bold text-black"
+               [class.error]="yearControl">
+          <label for="form4" class="text-black">Runtime</label>
         </div>
           <div class="md-form">
-        <label for="form5" class="text-white">Genre</label>
-        <input mdbInputDirective formControlName="Genre" type="text" id="form5" class="form-control text-white"
-               [class.error]="nameControlInvalid">
+        <label for="form5" class="text-black">Genre</label>
+        <input mdbInputDirective formControlName="Genre" type="text" id="form5" class="form-control font-weight-bold text-black"
+               [class.error]="genreControl">
           </div>
         <div class="md-form">
-          <label for="form6" class="text-white">Poster</label>
-          <input mdbInputDirective formControlName="Poster" type="text" id="form6" class="form-control text-white"
-                 [class.error]="nameControlInvalid">
+          <label for="form6" class="text-black">Poster</label>
+          <input mdbInputDirective formControlName="Poster" type="text" id="form6" class="form-control font-weight-bold text-black"
+                 [class.error]="posterControl">
         </div>
 
     <ng-content></ng-content>
     </form>
 
     <div class="modal-footer">
-      <button [disabled]="form.invalid" class="float-right btn third"
+      <button [disabled]="form.invalid" class="float-right btn second"
         *ngIf="!exists"
         (click)="createMovie(form)">
         Create Movie
       </button>
 
-      <button class="float-right btn third"
+      <button class="float-right btn second"
         *ngIf="exists"
         (click)="updateMovie(form)">
         Save changes

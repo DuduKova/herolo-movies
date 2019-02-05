@@ -9,7 +9,7 @@ import {Movie} from '../../models/Movie';
 export class ModalComponent implements OnInit {
   @Output() hide = new EventEmitter();
   @Output() delete = new EventEmitter();
-  @Input() movie;
+  @Input() selectedMovie;
 
   constructor() { }
 
@@ -21,7 +21,7 @@ export class ModalComponent implements OnInit {
   }
 
   closeModalAndDelete() {
-    this.delete.emit(this.movie);
+    this.delete.emit(this.selectedMovie);
   }
 
 }

@@ -119,6 +119,7 @@ p {
     background-position: 0 100%; }
 
 .modal-content {
-  background: linear-gradient(90deg, #0d47a1, #212121 50%); }
+  background: linear-gradient(90deg, white, #0d47a1 150%);
+  color: black; }
 
 /*# sourceMappingURL=movie-form.component.css.map */

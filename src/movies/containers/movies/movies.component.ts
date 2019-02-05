@@ -1,9 +1,10 @@
 import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
+import {Observable, } from 'rxjs';
 import {Movie} from '../../models/Movie';
 import * as fromStore from '../../store';
 import {MovieFormComponent} from '../../components';
+import { filter, map, mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'movies',
@@ -12,51 +13,77 @@ import {MovieFormComponent} from '../../components';
   styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
+  exists = false;
   movies$: Observable<Movie[]>;
+  loading: Observable<boolean>;
+  entities$: Observable<{}>;
   selectedMovie: Movie;
   @ViewChild('deleteModal') public deleteModal;
   @ViewChild('formModal') public formModal;
+  @ViewChild('alertModal') public alertModal;
   @ViewChild(MovieFormComponent) public movieForm;
 
-  constructor(private store: Store<fromStore.AppState>) {}
+  constructor(private store: Store<fromStore.AppState>) {
+  }
 
   ngOnInit() {
-     this.movies$ = this.store.select(fromStore.getAllMovies);
+    this.movies$ = this.store.select(fromStore.getAllMovies);
+    this.loading = this.store.select(fromStore.getMoviesLoaded);
+    this.entities$ = this.store.select(fromStore.getMoviesEntities);
   }
+
   onCreate(event: Movie) {
+    if (this.movies$.pipe(
+      mergeMap(movies => movies),
+      map(movie => movie.Title === event.Title)
+    )) {
+      return this.alertModal.show();
+    }
     this.store.dispatch(new fromStore.CreateMovie(event));
   }
 
   onUpdate(event: Movie) {
-    this.store.dispatch(new fromStore.UpdateMovie(event));
+    const check = this.movies$.pipe(
+      mergeMap(movies => movies),
+      filter(movie => movie.id === event.id));
+    let check2;
+    check.subscribe(value => check2 = value);
+    if (check2.Title === event.Title) {
+      this.store.dispatch(new fromStore.UpdateMovie(event));
+    } else {
+      return this.alertModal.show();
+    }
   }
-
   onRemove(event: Movie) {
     this.confirmDelete(event);
   }
 
-  openFormModal(movie: Movie) {
-    if (movie) {
-      this.selectedMovie = movie;
-    }
+  openFormModal() {
     this.formModal.show();
   }
 
-  closeFormModal() {
-    this.formModal.hide();
+  openFormModalEdit(movie: Movie) {
+    this.selectedMovie = movie;
+    this.exists = true;
+    this.formModal.show();
   }
 
   onFormModalClosed() {
+    this.formModal.hide();
     this.movieForm.title = 'Add Movie';
-    this.movieForm.exists = false;
+    this.exists = false;
+    this.movieForm.form.reset();
   }
 
   onCloseDeleteModal(movie: Movie) {
     this.store.dispatch(new fromStore.RemoveMovie(movie));
-    this.closeFormModal();
+    this.onFormModalClosed();
     this.deleteModal.hide();
-    this.deleteModal.movie = null;
-    this.formModal.exists = false;
+    this.deleteModal.selectedMovie = null;
+  }
+
+  closeAlertModal() {
+    this.alertModal.hide();
   }
 
   onCancelDeleteModal() {

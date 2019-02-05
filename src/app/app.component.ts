@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'herolo';
   @ViewChild(MoviesComponent) private moviesComponent;
 
-  onCreate(event) {
-    this.moviesComponent.openFormModal(event);
+  onCreate() {
+    this.moviesComponent.openFormModal();
   }
 }

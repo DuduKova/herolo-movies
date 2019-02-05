@@ -9,7 +9,6 @@ import {
 } from '@angular/forms';
 
 import {Movie} from '../../models/Movie';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-movie-form',
@@ -18,9 +17,9 @@ import {Observable} from 'rxjs';
   styleUrls: ['./movie-form.component.scss']
 })
 export class MovieFormComponent implements OnChanges {
-  exists = false;
+  @Input() exists: boolean;
   title = 'Add Movie';
-  @Input() movie: Movie;
+  @Input() selectedMovie: Movie;
 
   @Output() selected = new EventEmitter<Movie>();
   @Output() create = new EventEmitter<Movie>();
@@ -40,7 +39,7 @@ export class MovieFormComponent implements OnChanges {
     Runtime: ['', Validators.compose([
       Validators.required,
       Validators.maxLength(4),
-      Validators.pattern('[a-zA-Z0-9 ]*')])],
+      Validators.pattern('^[a-zA-Z0-9., -]+$')])],
     Year: ['', Validators.compose([
       Validators.required,
       Validators.minLength(4),
@@ -76,24 +75,21 @@ export class MovieFormComponent implements OnChanges {
     return this.form.get('Genre') as FormControl;
   }
 
-  get nameControlInvalid() {
-    return this.titleControl.hasError('required') && this.titleControl.touched;
+  get posterControl() {
+    return this.form.get('Poster') as FormControl;
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.movie) {
-      this.exists = true;
+    if (this.exists) {
       this.title = 'Edit Movie';
-      this.form.patchValue(this.movie);
+      this.form.patchValue(this.selectedMovie);
     } else {
       this.form.reset();
     }
-
   }
 
   closeModal() {
     this.hide.emit();
-    this.movie = null;
     this.form.reset();
   }
 
@@ -108,13 +104,13 @@ export class MovieFormComponent implements OnChanges {
   updateMovie(form: FormGroup) {
     const {value, valid, touched} = form;
     if (touched && valid) {
-      this.update.emit({...this.movie, ...value});
+      this.update.emit({...this.selectedMovie, ...value});
     }
     this.closeModal();
   }
 
   removeMovie(form: FormGroup) {
     const {value} = form;
-    this.remove.emit({...this.movie, ...value});
+    this.remove.emit({...this.selectedMovie, ...value});
   }
 }

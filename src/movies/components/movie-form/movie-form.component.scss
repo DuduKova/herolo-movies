@@ -1,5 +1,6 @@
 @import "../../../styles";
 
 .modal-content {
-  background: linear-gradient(90deg, $primary-color, $secondary-color 50%);
+  background: linear-gradient(90deg, white, $primary-color 150%);
+  color: black;
 }
