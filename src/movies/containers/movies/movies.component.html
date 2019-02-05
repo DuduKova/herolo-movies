@@ -1,0 +1,24 @@
+<div class="card-deck">
+  <div class="card-group" *ngFor="let movie of (movies$ | async)">
+    <movie [movie]="movie" (selectedMovie)="openFormModal(movie)" (remove)="confirmDelete(movie)"></movie>
+  </div>
+</div>
+
+
+<app-movie-form
+  mdbModal #formModal="mdbModal" class="modal fade"
+  id="exampleModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true"
+  [movie]="selectedMovie"
+  (create)="onCreate($event)"
+  (update)="onUpdate($event)"
+  (remove)="onRemove($event)"
+  (hide)="closeFormModal()"
+  (closed)="onFormModalClosed()">
+</app-movie-form>
+
+<app-modal mdbModal #deleteModal="mdbModal" class="modal fade right" id="frameModalTop" tabindex="-1" role="dialog"
+           aria-labelledby="myModalLabel" aria-hidden="true"
+           (hide)="onCloseDeleteModal($event)" (delete)="onCloseDeleteModal($event)" [movie]="selectedMovie">
+</app-modal>
+

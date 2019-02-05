@@ -1,0 +1,65 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="exampleModalLabel">{{title}}</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="form">
+        <div class="md-form">
+          <input mdbInputDirective formControlName="Title" type="text" id="form1" class="form-control"
+                 [class.error]="nameControlInvalid">
+          <label for="form1" class="">Title</label>
+        </div>
+        <div class="md-form">
+          <input mdbInputDirective formControlName="Director" type="text" id="form2" class="form-control"
+                 [class.error]="nameControlInvalid">
+          <label for="form2" class="">Director</label>
+        </div>
+        <div class="md-form">
+        <input mdbInputDirective formControlName="Year" type="text" id="form3" class="form-control"
+               [class.error]="nameControlInvalid">
+          <label for="form3" class="">Year</label>
+        </div>
+        <div class="md-form">
+        <input mdbInputDirective formControlName="Runtime" type="text" id="form4" class="form-control"
+               [class.error]="nameControlInvalid">
+          <label for="form4" class="">Runtime (min)</label>
+        </div>
+          <div class="md-form">
+        <label for="form5" class="">Genre</label>
+        <input mdbInputDirective formControlName="Genre" type="text" id="form5" class="form-control"
+               [class.error]="nameControlInvalid">
+          </div>
+
+    <ng-content></ng-content>
+    </form>
+
+    <div class="modal-footer">
+      <button size="md" mdbBtn [disabled]="form.invalid"
+        type="button" class="btn btn-primary waves-light" mdbWavesEffect
+        *ngIf="!exists"
+        (click)="createMovie(form)">
+        Create Movie
+      </button>
+
+      <button size="md" mdbBtn type="button" color="primary" mdbWavesEffect
+        *ngIf="exists"
+        (click)="updateMovie(form)">
+        Save changes
+      </button>
+
+      <button size="md" mdbBtn type="button" color="danger" mdbWavesEffect
+        *ngIf="exists"
+        (click)="removeMovie(form)">
+        Delete Movie
+      </button>
+      <button size="md" mdbBtn type="button" color="yellow" data-dismiss="modal" (click)="closeModal()"
+              mdbWavesEffect>Close
+      </button>
+    </div>
+  </div>
+</div>
+</div>
