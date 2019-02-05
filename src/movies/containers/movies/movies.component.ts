@@ -33,13 +33,18 @@ export class MoviesComponent implements OnInit {
   }
 
   onCreate(event: Movie) {
-    if (this.movies$.pipe(
+    const check = this.movies$.pipe(
       mergeMap(movies => movies),
-      map(movie => movie.Title === event.Title)
-    )) {
+      filter(movie => movie.Title === event.Title)
+    );
+    let check2;
+    check.subscribe(value => check2 = value);
+    if (check2) {
+      console.log(check2);
       return this.alertModal.show();
+    } else {
+      this.store.dispatch(new fromStore.CreateMovie(event));
     }
-    this.store.dispatch(new fromStore.CreateMovie(event));
   }
 
   onUpdate(event: Movie) {
@@ -49,6 +54,8 @@ export class MoviesComponent implements OnInit {
     let check2;
     check.subscribe(value => check2 = value);
     if (check2.id === event.id && check2.Title === event.Title) {
+      console.log(check);
+      console.log(check2);
       this.store.dispatch(new fromStore.UpdateMovie(event));
     } else {
       return this.alertModal.show();
